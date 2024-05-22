@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Chuck Norris Jokes</title>
+    <style>
+        body {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+            font-family: Arial, sans-serif;
+            background: #f4f4f4;
+        }
+        #jokeContainer {
+            margin-top: 20px;
+            text-align: center;
+            background: rgba(255, 255, 255, 0.7);
+            padding: 20px;
+            border-radius: 10px;
+            width: 50%;
+            min-height: 200px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background-size: cover;
+            background-position: center;
+        }
+        #jokeButton {
+            padding: 10px 20px;
+            font-size: 20px;
+            border: none;
+            border-radius: 5px;
+            background-color: #007BFF;
+            color: white;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+    <button id="jokeButton">Get Joke</button>
+    <div id="jokeContainer"></div>
+
+    <script>
+        document.getElementById('jokeButton').addEventListener('click', function() {
+            fetch('https://api.chucknorris.io/jokes/random')
+                .then(response => response.json())
+                .then(data => {
+                    document.getElementById('jokeContainer').innerText = data.value;
+                    document.getElementById('jokeContainer').style.backgroundImage = `url(${data.icon_url})`;
+                });
+        });
+    </script>
+</body>
+</html>
